@@ -6,9 +6,8 @@ mongoose.connect('localhost:27017/test');
 var Schema = mongoose.Schema;
 
 var userDataSchema = new Schema({
-  title: {type: String, required: true},
-  content: String,
-  author: String
+  name: {type: String, required: true},
+  email: String
 }, {collection: 'user-data'}); // overwrite the default of pluralizing UserData
 
 var UserData = mongoose.model('UserData', userDataSchema);
@@ -26,13 +25,12 @@ router.get('/get-data', function(req,res,next){
 });
 
 router.post('/insert', function(req,res,next){
-  var item = {
-    title: req.body.title,
-    content: req.body.content,
-    author: req.body.author
+  var user = {
+    name: req.body.name,
+    email: req.body.email
   };
 
-  var data = new UserData(item);
+  var data = new UserData(user);
   data.save();
   res.redirect('/');
 });
