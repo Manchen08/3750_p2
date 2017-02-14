@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const session = require('express-session');
+const passport = require('passport');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -23,6 +24,10 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
+// passport setup
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Express Flash Messages with pug
 app.use(require('connect-flash')());

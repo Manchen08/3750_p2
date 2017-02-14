@@ -1,11 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
+const passport = require('../lib/auth').passport;
+
 let User = require('../models/user');
+
+// logout
+router.get('/logout', (req, res, next) => {
+    req.logout();
+    req.flash('success_msg', "You are logged out");
+    res.redirect('/users/login');
+});
 
 // Login Form
 router.get('/login', (req, res, next) => {
     res.render('login');
+});
+
+// login processing
+router.post('/login', (req, res, next) => {
+    // Jon to fill this part in
 });
 
 // Register Form
