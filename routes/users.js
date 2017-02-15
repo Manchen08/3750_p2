@@ -8,6 +8,24 @@ router.get('/login', (req, res, next) => {
     res.render('login');
 });
 
+router.post('/login', (req,res,next) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    req.checkBody('username', 'Username field is required').notEmpty();
+    req.checkBody('password', 'Password field is required').notEmpty();
+
+    let errors = req.validationErrors();
+
+    if (errors) {
+        res.render('register', {
+            errors: errors
+        });
+    } else {
+
+
+    }
+});
 // Register Form
 router.get('/register', (req, res, next) => {
     res.render('register');
