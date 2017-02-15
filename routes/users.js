@@ -21,20 +21,21 @@ router.get('/login', (req, res, next) => {
 router.post('/login', (req,res,next) => {
     const username = req.body.username;
     const password = req.body.password;
-
     req.checkBody('username', 'Username field is required').notEmpty();
     req.checkBody('password', 'Password field is required').notEmpty();
 
     let errors = req.validationErrors();
 
     if (errors) {
-        res.render('register', {
+        res.render('login', {
             errors: errors
-        });
-    } else {
-
-
-    }
+        })
+    } else { 
+      // passport.authenticate('local'),
+      // function(req, res) {
+      //   res.redirect('/users/' + username);
+      //  }
+    } 
 });
 
 // Register Form
