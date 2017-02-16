@@ -19,24 +19,13 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  req.checkBody('username', 'Username field is required').notEmpty();
-  req.checkBody('password', 'Password field is required').notEmpty();
 
-  let errors = req.validationErrors();
+  passport.authenticate('local', {
+    successRedirect: '/', // Remember to change redirect.
+    failureRedirect: '/users/login',
+    failureFlash: true
+  })(req, res, next);
 
-  if (errors) {
-    res.render('login', {
-      errors: errors
-    })
-  } else {
-      passport.authenticate('local', {
-        successRedirect: '/', // Remember to change redirect.
-        failureRedirect: '/login',
-        failureFlash: true
-      })
-  }
 });
 
 // Register Form
