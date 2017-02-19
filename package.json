@@ -22,6 +22,8 @@
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
-    "bcryptjs": "*"
+    "bcryptjs": "*",
+    "bootstrap": "*",
+    "jquery": "*"
   }
 }

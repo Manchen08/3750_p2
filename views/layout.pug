@@ -2,8 +2,13 @@ doctype html
 html
   head
     title= title
+    //- meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='https://bootswatch.com/flatly/bootstrap.min.css')
+    link(rel = 'stylesheet', href='node_modules/bootstrap/dist/css/bootstrap.min.css')
+    //- link(rel='stylesheet', href='https://bootswatch.com/flatly/bootstrap.min.css')
+    script(src="/node_modules/jquery/dist/jquery.min.js")
+    script(src="/node_modules/bootstrap/dist/js/bootstrap.min.js")
+
   body
     include ./includes/navbar.pug
     block content
@@ -11,3 +16,22 @@ html
     footer
       .container
         copyright &copy; 2017 CS3750 Project 2
+
+//- doctype html  
+//- html
+//-   head
+//-     title Pug Example
+//-     meta(name="viewport" content="width=device-width, initial-scale=1")
+//-     link(rel='stylesheet', href='/stylesheets/style.css')
+//-     link(rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css")
+//-     link(rel="stylesheet" href="/css/payment.css")
+//-     script(src="/node_modules/jquery/dist/jquery.min.js")
+//-     script(src="/node_modules/bootstrap/dist/js/bootstrap.min.js")  
+
+//-   body
+//-     include ./includes/navbar.pug
+//-     div.container
+//-      block content
+//-     footer
+//-        .container
+//-          copyright &copy; 2017 CS3750 Project 2
