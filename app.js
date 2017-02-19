@@ -30,6 +30,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function (req, res, next) {
+  res.locals.isLoggedIn = req.isAuthenticated();
+  next();
+});
+
 // Express Flash Messages with pug
 app.use(require('connect-flash')());
 app.use((req, res, next) => {

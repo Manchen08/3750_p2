@@ -15,11 +15,13 @@ nav.navbar.navbar-default
           a(href='/')
             | Home  
       ul.nav.navbar-nav.navbar-right
-        li
-          a(href='/users/logout') Logout
-        li
-          a(href='/users/login') Login
-        li
-          a(href='/users/register') Register
+        if isLoggedIn
+          li
+            a(href='/users/logout') Logout          
+        else
+          li
+            a(href='/users/login') Login
+          li
+            a(href='/users/register') Register
     //- /.navbar-collapse
   //- /.container-fluid
