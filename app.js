@@ -16,6 +16,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.use(express.static(__dirname));
 
 // Express session
 // needed by Express Messages and Passport
@@ -28,6 +29,11 @@ app.use(session({
 // passport setup
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function (req, res, next) {
+  res.locals.isLoggedIn = req.isAuthenticated();
+  next();
+});
 
 // Express Flash Messages with pug
 app.use(require('connect-flash')());
