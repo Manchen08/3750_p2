@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/project2');
 const bcrypt = require('bcryptjs');
 
 // User Schema

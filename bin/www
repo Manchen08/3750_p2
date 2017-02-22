@@ -5,10 +5,12 @@
  */
 
 var app = require('../app');
+const sessionStore = require('../app').sessionStore;
+const passportSocketIo = require('passport.socketio');
 var debug = require('debug')('project2:server');
 var http = require('http');
 var socket = require('socket.io');
-var socketController = require('../routes/socket');
+const cookieParser = require('cookie-parser');
 
 /**
  * Get port from environment and store in Express.
@@ -21,8 +23,17 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
-var io = socket(server);
+const server = http.createServer(app);
+const io = socket(server);
+
+io.use(passportSocketIo.authorize({
+  cookieParser: cookieParser,       // the same middleware you registrer in express 
+  key: 'connect.sid',       // the name of the cookie where express/connect stores its session_id 
+  secret: 'secret',    // the session_secret to parse the cookie 
+  store: sessionStore,        // we NEED to use a sessionstore. no memorystore please 
+}));
+
+var socketController = require('../routes/socket');
 socketController(io);
 
 

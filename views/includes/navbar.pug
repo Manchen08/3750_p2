@@ -11,9 +11,10 @@ nav.navbar.navbar-default
     //- Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav
+        li  
+          a(href='/') Home
         li
-          a(href='/')
-            | Home  
+          a(href='/chatroom') Chats
       ul.nav.navbar-nav.navbar-right
         if isLoggedIn
           li
