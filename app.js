@@ -7,22 +7,37 @@ var bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const session = require('express-session');
 const passport = require('passport');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
+// mongoose setup
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/project2');
+
+// don't use MemoryStore
+const sessionStore = new MongoStore({ mongooseConnection: mongoose.connection });
+//const sessionStore = new session.MemoryStore;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(__dirname));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // Express session
 // needed by Express Messages and Passport
 app.use(session({
   secret: 'secret',
   resave: false,
+  store: sessionStore,
   saveUninitialized: true
 }));
 
@@ -63,9 +78,6 @@ app.use(expressValidator({
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
@@ -90,3 +102,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+module.exports.sessionStore = sessionStore;

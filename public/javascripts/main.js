@@ -10,8 +10,10 @@ $(document).ready(function(){
     let error = $('#error');
     
     socket.emit('getUser');
-    socket.on('username', data => {
-        username = data;
+    socket.on('user', data => {
+        name = data.name;
+        username = data.username;
+        console.log('got name: ' + name);
         console.log('got username: ' + username);
     });
 
