@@ -23,6 +23,7 @@
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
+    "passport.socketio": "^3.7.0",
     "bcryptjs": "*",
     "jquery": "*"
   }
