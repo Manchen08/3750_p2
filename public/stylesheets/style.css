@@ -7,6 +7,18 @@ a {
   color: #00B7FF;
 }
 
+#chatWindow {
+    height: 100px;
+}
+
+.login {
+    color: green;
+}
+
+.logout {
+    color: red;
+}
+
 #messages{
     padding: 10px;
 }

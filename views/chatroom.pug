@@ -6,15 +6,12 @@ block content
         .row
             .col-md-8
                 h1 Let's chat 
+                #chatWindow.well.pre-scrollable
                 form#chatForm
                     .form-group
-                        textarea#chatInput.form-control(name="body", placeholder="Say something...")
-                        br
-                        button.btn.btn-default(type="submit") Post
+                        textarea#chatInput.form-control.send_on_enter(name="body", placeholder="Say something...")
                         br
                         br
-                    #chatWindow.well
-            //- .col-md-4
-                //- h3 Users Online
-                    //- #users.well
-        
+            .col-md-4
+              h3 Users Online
+                ul#userList.list-group.well
