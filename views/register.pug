@@ -6,20 +6,23 @@ block content
         include ./includes/messages.pug
         form(method='post', action='/users/register')
             .form-group
-                label Name
-                input.form-control(type='text', name='name', placeholder='Name', required)
+                label First Name
+                input.form-control(type='text', name='fname', placeholder='First name', required)
             .form-group
-                label Username
-                input.form-control(type='text', name='username', placeholder='Username', required)
+                label Last Name
+                input.form-control(type='text', name='lname', placeholder='Last name', required)
+            .form-group
+                label Username (Allowed chars: alphanumeric plus _ and -)
+                input.form-control(type='text', name='username', pattern="[0-9A-Z-_]" placeholder='Username', required)
             .form-group
                 label Email
                 input.form-control(type='email', name='email', placeholder='Email', required)
             .form-group
-                label Password
-                input.form-control(type='password', name='password', placeholder='Password', required)
+                label Password (6 Character Minimum)
+                input.form-control(type='password', name='password', pattern=".{6,}", placeholder='Password', required)
             .form-group
                 label Confirm Password
-                input.form-control(type='password', name='password2', placeholder='Confirm Password', required)
+                input.form-control(type='password', name='password2', pattern=".{6,}", placeholder='Confirm Password', required)
             button.btn.btn-primary(type='submit') Register
             br
             |   Have An Account? 
