@@ -35,17 +35,21 @@ router.get('/register', (req, res, next) => {
 
 // Process Register
 router.post('/register', (req, res, next) => {
-    const name = req.body.name;
+    const fname = req.body.fname;
+    const lname = req.body.lname;
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
     const password2 = req.body.password2;
 
-    req.checkBody('name', 'Name field is required').notEmpty();
+    req.checkBody('fname', 'First name field is required').notEmpty();
+    req.checkBody('lname', 'Last name field is required').notEmpty();
     req.checkBody('email', 'Email field is required').notEmpty();
     req.checkBody('email', 'Email must be a valid email addressd').isEmail();
     req.checkBody('username', 'Username field is required').notEmpty();
+    req.checkBody('username', 'Username can only be alphanum and _ -').matches(/^[0-9A-Z-_]+$/i);
     req.checkBody('password', 'Password field is required').notEmpty();
+    req.checkBody('password', 'Password must be at least 6 characters').len(6);
     req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
     let errors = req.validationErrors();
@@ -56,7 +60,8 @@ router.post('/register', (req, res, next) => {
         });
     } else {
         const newUser = new User({
-            name: name,
+            fname: fname,
+            lname: lname,
             username: username,
             email: email,
             password: password
