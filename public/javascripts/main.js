@@ -9,6 +9,17 @@ $(document).ready(function () {
     let error = $('#error');
     let users = [];
 
+    chatForm.on('submit', function(e){
+            e.preventDefault(); // prevent actual form submission
+            socket.emit('c2smsg', message.val());
+            chatWindow.append('<strong>You:</strong> ' + message.val() + '<br>');
+            chatWindow.animate({
+                scrollTop: chatWindow[0].scrollHeight
+            }, 1000);
+            message.val('');
+            return false;
+    });
+
     $('.send_on_enter').keydown(function (event) {
         if (event.keyCode == 13) { // enter key has keyCode = 13
             socket.emit('c2smsg', message.val());
