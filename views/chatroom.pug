@@ -1,21 +1,29 @@
 extends layout
 
 block content
-    .container
+    head
+        link(href='stylesheets/snippet.css', rel='stylesheet')
+    body
         include ./includes/messages.pug
-        .row
-            .col-md-8
-                h1 Let's chat 
-                #chatWindow.well.pre-scrollable
-                form#chatForm
-                    .form-group
-                        textarea#chatInput.form-control.send_on_enter(name="body", placeholder="Say something...")
-                        br
-                        button.btn.btn-default(type="submit") Post
-                        br
-                        br
-            .col-md-4
-              h3 Users Online
-                ul#userList.list-group.well
+            .container
+                //- .row
+                //-     div.col-lg-3
+                //-         h3 Users Online
+                //-     div.col-lg-7
+                //-         h3 Let's chat
+                .row
+                    .conversation-wrap.col-lg-3
+                        div#userList.user-wrap
+                            h2.conversation.padding Users Online
+                    //h3 Let's chat
+                    .message-wrap.col-lg-9
+                        h3.title-padding Let's chat
+                        div.msg-wrap
+                            #chatWindow.well.pre-scrollable.test-style
+                            form#chatForm
+                                .form-group
+                                    textarea#chatInput.form-control.send_on_enter(name="body", placeholder="Say something...")
+                                    br
+                                    button.btn.btn-default(type="submit") Post
     script(src="/socket.io/socket.io.js")
     script(src="/javascripts/main.js")
