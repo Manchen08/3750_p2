@@ -12,6 +12,9 @@ $(document).ready(function () {
     chatForm.on('submit', function(e){
             e.preventDefault(); // prevent actual form submission
             socket.emit('c2smsg', message.val());
+                if(message.val().length == 0){
+                    return false;
+                }
             chatWindow.append('<strong>You:</strong> ' + message.val() + '<br>');
             chatWindow.animate({
                 scrollTop: chatWindow[0].scrollHeight
@@ -22,6 +25,9 @@ $(document).ready(function () {
 
     $('.send_on_enter').keydown(function (event) {
         if (event.keyCode == 13) { // enter key has keyCode = 13
+            if(message.val().length == 0){
+                return false;
+            }
             socket.emit('c2smsg', message.val());
             chatWindow.append('<strong>You:</strong> ' + message.val() + '<br>');
             chatWindow.animate({
@@ -49,9 +55,17 @@ $(document).ready(function () {
 
     socket.on('userList', function (data) {
         let html = '';
-        for (let i = 0; i < data.length; i++) {
-            html += '<li class="list-group-item" id="' + data[i] + '">' + data[i] + '</li>';
+        data.sort();
+        for(let i = 0; i < data.length; i++){
+            while(data[i] == data[i+1] && i < data.length-1){ // this makes so that users are not listed twice
+                i++;
+            }
+            html += '<h3 class="conversation padding" id="' + data[i] + '">' + data[i] + '</h3>';
         }
+        // let i = 0;
+        // for (let i = 0; i < data.length; i++) {
+        //     html += '<h3 class="conversation padding" id="' + data[i] + '">' + data[i] + '</h3>';
+        // }
         usersul.append(html);
     });
 
@@ -63,7 +77,7 @@ $(document).ready(function () {
 
     socket.on('userLoggedIn', (data) => {
         chatWindow.append('<span class="pull-right login"><strong>' + data + '</strong> joined the chat room</span><br>');
-        usersul.append('<li class="list-group-item" id="' + data + '">' + data + '</li>');
+        usersul.append('<h3 class="conversation padding" id="' + data + '">' + data + '</h3>');
         scrollChatWindow();
     });
 
